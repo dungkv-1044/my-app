@@ -1,26 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends Component {
+  render() {
+    const { fetching, data, fetchProducts, error } = this.props as any;
+    return (
+        <div className="App">
+          {data ? (
+              <div>
+                <p className="App-intro">Products</p>
+                {data.map((i: any, index: number) => (
+                    <p key={index}>{i.id} - {i.name}</p>
+                ))}
+              </div>
+          ) : (
+              <p className="App-intro">No Products</p>
+          )}
+
+          {fetching ? (
+              <button disabled>Fetching...</button>
+          ) : (
+              <button onClick={fetchProducts}>Fetch Product</button>
+          )}
+
+          {error && <p style={{ color: "red" }}>something went wrong!</p>}
+
+        </div>
+    );
+  }
 }
-
-export default App;
