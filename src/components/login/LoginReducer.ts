@@ -1,19 +1,20 @@
-import {API_CALL_FAILURE, API_CALL_REQUEST, API_CALL_SUCCESS} from "./AppActions"
-// reducer with initial state
+import {LOGIN_FAIL, LOGIN_REQUEST, LOGIN_SUCCESS} from "./LoginActions";
+
+
 const initialState = {
     fetching: false,
     data: null,
     error: null
 };
 
-export function appReducer(state = initialState, action: any) {
-    console.log("Daat", action)
+export function loginReducer(state = initialState, action: any) {
+    console.log("AAAA ", action)
     switch (action.type) {
-        case API_CALL_REQUEST:
+        case LOGIN_REQUEST:
             return {...state, fetching: true, error: null};
-        case API_CALL_SUCCESS:
+        case LOGIN_SUCCESS:
             return {...state, fetching: false, data: action.data};
-        case API_CALL_FAILURE:
+        case LOGIN_FAIL:
             return {...state, fetching: false, data: null, error: action.error};
         default:
             return state;
